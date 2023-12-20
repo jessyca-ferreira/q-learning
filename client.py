@@ -2,9 +2,9 @@ import connection
 import numpy
 import random
 
-RANDOMNESS = 0.65
-LEARNING_RATE = 0.09
-DISCOUNT_FACTOR = 0.6
+RANDOMNESS = 0.3
+LEARNING_RATE = 1
+DISCOUNT_FACTOR = 0.9
 RESULTS = numpy.loadtxt("resultado.txt")
 
 
@@ -26,11 +26,11 @@ socket_connect = connection.connect(2037)
 directions = {0: "Norte", 1: "Leste", 2: "Sul", 3: "Oeste"}
 moves = {0: "left", 1: "right", 2: "jump"}
 
-current_platform = 0
+current_platform = 4
 current_direction = 0
-current_state = 0
+current_state = 16
 
-max_iterations = 1000000
+max_iterations = 1000
 for i in range (max_iterations):
     print(f'Plataforma: {current_platform} | Direção: {current_direction}')
     move = moves[find_move(current_state)]
