@@ -2,8 +2,8 @@ import connection
 import numpy
 import random
 
-RANDOMNESS = 0.3
-LEARNING_RATE = 1
+RANDOMNESS = 0.15
+LEARNING_RATE = 0.01
 DISCOUNT_FACTOR = 0.9
 RESULTS = numpy.loadtxt("resultado.txt")
 
@@ -14,9 +14,9 @@ def find_move (state):
         return random.randint(0,2)      # numero aleatorio que referencia possiveis movimentos
     
     print('Best')
-    if RESULTS[state, 0] > RESULTS[state, 1] and RESULTS[state, 0] > RESULTS[state, 2]: return 0
-    if RESULTS[state, 1] > RESULTS[state, 0] and RESULTS[state, 1] > RESULTS[state, 2]: return 1
-    if RESULTS[state, 2] > RESULTS[state, 0] and RESULTS[state, 2] > RESULTS[state, 1]: return 2
+    if RESULTS[state, 0] >= RESULTS[state, 1] and RESULTS[state, 0] >= RESULTS[state, 2]: return 0
+    if RESULTS[state, 1] >= RESULTS[state, 0] and RESULTS[state, 1] >= RESULTS[state, 2]: return 1
+    if RESULTS[state, 2] >= RESULTS[state, 0] and RESULTS[state, 2] >= RESULTS[state, 1]: return 2
 
 def q_function (state, reard, current_state):
     return RESULTS[current_state][list(moves.values()).index(move)] + LEARNING_RATE * (reard + DISCOUNT_FACTOR * max(RESULTS[state]) - RESULTS[current_state][list(moves.values()).index(move)])
@@ -26,11 +26,11 @@ socket_connect = connection.connect(2037)
 directions = {0: "Norte", 1: "Leste", 2: "Sul", 3: "Oeste"}
 moves = {0: "left", 1: "right", 2: "jump"}
 
-current_platform = 4
+current_platform = 2
 current_direction = 0
-current_state = 16
+current_state = 8
 
-max_iterations = 1000
+max_iterations = 100
 for i in range (max_iterations):
     print(f'Plataforma: {current_platform} | Direção: {current_direction}')
     move = moves[find_move(current_state)]

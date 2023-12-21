@@ -1,0 +1,4 @@
+RANDOMNESS = 0.9
+LEARNING_RATE = 0.09
+DISCOUNT_FACTOR = 0.6
+RESULTS = numpy.loadtxt("resultado.txt")
